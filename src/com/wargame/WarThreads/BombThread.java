@@ -44,7 +44,7 @@ public class BombThread implements Runnable{
                 enemyWithBomb.get(soldierIndex).shoot();
 
 
-                for (int i = (WarGameWorld.ally.getSoldiers().size()/4); i< WarGameWorld.ally.getSoldiers().size(); i++) {
+                for (int i = (WarGameWorld.ally.getSoldiers().size() * 3/4); i< WarGameWorld.ally.getSoldiers().size(); i++) {
                     soldierIndex = new Random().nextInt(WarGameWorld.ally.getSoldiers().size());
                     choice = new Random().nextInt(10);
 
@@ -72,7 +72,7 @@ public class BombThread implements Runnable{
             if (allyWithBomb.get(soldierIndex).getWeapon().isActive() && allyWithBomb.get(soldierIndex).isAlive()) {
                 allyWithBomb.get(soldierIndex).shoot();
 
-                for (int i = (WarGameWorld.enemy.getSoldiers().size()/4); i< WarGameWorld.enemy.getSoldiers().size(); i++) {
+                for (int i = (WarGameWorld.enemy.getSoldiers().size()* 3/4); i< WarGameWorld.enemy.getSoldiers().size(); i++) {
                     soldierIndex = new Random().nextInt(WarGameWorld.enemy.getSoldiers().size());
                     choice = new Random().nextInt(10);
                     if (difficulty.equals(Difficulty.SIMPLE)) {
@@ -111,6 +111,5 @@ public class BombThread implements Runnable{
         }else {
             throwBomb();
         }
-
     }
 }

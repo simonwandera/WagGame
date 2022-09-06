@@ -33,6 +33,14 @@ public class JetThread implements Runnable {
         });
     }
 
+    public boolean noJetHasMissiles( ArrayList<Soldier> soldierWithJet) {
+
+        for (int k = 0; k < soldierWithJet.size(); k++)
+            if (soldierWithJet.get(k).getWeapon().isActive() && soldierWithJet.get(k).isAlive())
+                return false;
+        return true;
+    }
+
     private synchronized void fireMissile() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
@@ -41,11 +49,11 @@ public class JetThread implements Runnable {
             // select enemy to bomb
 
             int soldierIndex = new Random().nextInt(enemyWithJet.size());
-            if (enemyWithBomb.get(soldierIndex).getWeapon().isActive() && enemyWithBomb.get(soldierIndex).isAlive()) {
-                enemyWithBomb.get(soldierIndex).shoot();
+            if (enemyWithJet.get(soldierIndex).getWeapon().isActive() && enemyWithJet.get(soldierIndex).isAlive()) {
+                enemyWithJet.get(soldierIndex).shoot();
 
 
-                for (int i = (WarGameWorld.ally.getSoldiers().size()/4); i< WarGameWorld.ally.getSoldiers().size(); i++) {
+                for (int i = (WarGameWorld.ally.getSoldiers().size() * 7/8); i< WarGameWorld.ally.getSoldiers().size(); i++) {
                     soldierIndex = new Random().nextInt(WarGameWorld.ally.getSoldiers().size());
                     choice = new Random().nextInt(10);
 
@@ -60,20 +68,19 @@ public class JetThread implements Runnable {
                             WarGameWorld.ally.getSoldiers().get(soldierIndex).shot();
                     }
                 }
-
             }
             else
-                enemyWithBomb.get(soldierIndex).setAlive(false);
+                enemyWithJet.get(soldierIndex).setAlive(false);
 
         }
 
-        else if(this.bomber.equals("ally")) {
+        else if(this.soldierType.equals("ally")) {
 
-            int soldierIndex = new Random().nextInt(allyWithBomb.size());
-            if (allyWithBomb.get(soldierIndex).getWeapon().isActive() && allyWithBomb.get(soldierIndex).isAlive()) {
-                allyWithBomb.get(soldierIndex).shoot();
+            int soldierIndex = new Random().nextInt(allyWithJet.size());
+            if (allyWithJet.get(soldierIndex).getWeapon().isActive() && allyWithJet.get(soldierIndex).isAlive()) {
+                allyWithJet.get(soldierIndex).shoot();
 
-                for (int i = (WarGameWorld.enemy.getSoldiers().size()/4); i< WarGameWorld.enemy.getSoldiers().size(); i++) {
+                for (int i = (WarGameWorld.enemy.getSoldiers().size() * 7/8); i< WarGameWorld.enemy.getSoldiers().size(); i++) {
                     soldierIndex = new Random().nextInt(WarGameWorld.enemy.getSoldiers().size());
                     choice = new Random().nextInt(10);
                     if (difficulty.equals(Difficulty.SIMPLE)) {
@@ -91,13 +98,17 @@ public class JetThread implements Runnable {
                 }
             }
             else
-                allyWithBomb.get(soldierIndex).setAlive(false);
+                allyWithJet.get(soldierIndex).setAlive(false);
         }
     }
 
     @Override
     public void run() {
-
-
+        getSoldiersWithJet();
+        if (noJetHasMissiles(allyWithJet) || noJetHasMissiles(enemyWithJet)){
+            Thread.currentThread().stop();
+        }else {
+            fireMissile();
+        }
     }
 }

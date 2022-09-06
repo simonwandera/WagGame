@@ -2,10 +2,9 @@ package com.wargame;
 
 import com.wargame.WarThreads.BombThread;
 import com.wargame.WarThreads.GunThread;
+import com.wargame.WarThreads.JetThread;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
 
 public class WarGameWorld {
     private static int maxSoldiers = 10000;
@@ -41,6 +40,9 @@ public class WarGameWorld {
         return true;
     }
 
+
+
+
     public boolean noWeaponHasBullets(Army army) {
 
         for (int k = 0; k < army.getSoldiers().size(); k++)
@@ -49,18 +51,7 @@ public class WarGameWorld {
         return true;
     }
 
-    private int deadSoldiers(Army army){
-        int alive = 0;
-        for (int k = 0; k < army.getSoldiers().size(); k++){
-            if (army.getSoldiers().get(k).isAlive()) {
-                alive = alive + 1;
-            }
-        }
-        int deadSoldiers = army.getSoldiers().size() - alive;
-        return deadSoldiers;
-    }
-
-    public void run() throws InterruptedException {
+    public String run() throws InterruptedException {
         // - Setup the game [Soldiers, Army (Ally, Enemy), Weapon Arsenal]
         // - Run the game [ Soldiers shoot at enemy, Control Weapons + Arsenal ]
         // - Control the game. Determine, when the game ends...
@@ -76,8 +67,11 @@ public class WarGameWorld {
                 System.out.println(noWeaponHasBullets(ally) + " No weapon has bullets ally");
                 System.out.println(noWeaponHasBullets(enemy) + " No weapon has bullets enemy");
 
-                System.out.println("Exit...");
+                if
+                System.out.println("kallll");
                 break;
+
+
 
             }
             Thread gun1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
@@ -86,17 +80,24 @@ public class WarGameWorld {
             Thread bomb1 = new Thread(new BombThread("ally", Difficulty.SIMPLE));
             Thread bomb2 = new Thread(new BombThread("enemy", Difficulty.SIMPLE));
 
+            Thread jet1 = new Thread(new JetThread("ally", Difficulty.SIMPLE));
+            Thread jet2 = new Thread(new JetThread("enemy", Difficulty.SIMPLE));
+
             gun1.start();
             gun2.start();
             bomb1.start();
             bomb2.start();
 
+            jet1.start();
+            jet2.start();
+
             gun1.join();
             gun2.join();
             bomb1.join();
             bomb2.join();
+            jet1.join();
+            jet2.join();
 
         }
-
     }
 }
