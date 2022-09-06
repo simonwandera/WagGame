@@ -55,7 +55,7 @@ public class GunThread implements Runnable{
     private void startFiring() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
-        if (this.shooter == "enemy") {
+        if (this.shooter.equals("enemy")) {
 
             // enemy shooting
             for (int k = 0; k < 5; k++) {
@@ -84,7 +84,7 @@ public class GunThread implements Runnable{
 
         }
 
-        else if(this.shooter == "ally") {
+        else if(this.shooter.equals("ally")) {
             for (int k = 0; k < 10; k ++) {
                 int soldierIndex = new Random().nextInt(allyWithGuns.size());
                 if (allyWithGuns.get(soldierIndex).getWeapon().isActive() && allyWithGuns.get(soldierIndex).isAlive())
@@ -97,9 +97,18 @@ public class GunThread implements Runnable{
                 int soldierIndex = new Random().nextInt(enemyWithGuns.size());
                 choice = new Random().nextInt(10);
 
+                if(difficulty == Difficulty.SIMPLE){
+                    if (choice > 0 && enemyWithGuns.get(soldierIndex).isAlive())
+                        enemyWithGuns.get(soldierIndex).shot();
+                } else if (difficulty == Difficulty.HARD) {
+                    if (choice > 4 && enemyWithGuns.get(soldierIndex).isAlive())
+                        enemyWithGuns.get(soldierIndex).shot();
 
-                if (choice % 2 == 0 && enemyWithGuns.get(soldierIndex).isAlive())
-                    enemyWithGuns.get(soldierIndex).shot();
+                } else if (difficulty == Difficulty.EXTREME) {
+                    if (choice > 5 && enemyWithGuns.get(soldierIndex).isAlive())
+                        enemyWithGuns.get(soldierIndex).shot();
+
+                }
             }
         }
     }
