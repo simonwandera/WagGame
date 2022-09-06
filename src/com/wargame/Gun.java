@@ -16,6 +16,13 @@ public class Gun {
         this.bullets = bullets;
     }
 
+    public boolean loaded(){
+        if(this.bullets > 0)
+            return true;
+        else;
+        return false;
+    }
+
     public void shoot(){
         this.bullets--;
         System.out.println("Gun " + this.gunNumber + " shooting" );
