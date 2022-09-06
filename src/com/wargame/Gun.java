@@ -4,7 +4,7 @@ public class Gun extends Weapon {
     int bullets;
     String gunNumber;
 
-    public Gun(String size, int bullets, String gunNumber) {
+    public Gun(String gunNumber, int bullets) {
         this.bullets = bullets;
         this.gunNumber = gunNumber;
     }

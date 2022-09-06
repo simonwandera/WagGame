@@ -1,10 +1,10 @@
 package com.wargame;
 
 public class Bomb extends Weapon {
-    private int bombNo;
+    private String bombNo;
     private boolean loaded = true;
 
-    public Bomb(int bombNo) {
+    public Bomb(String bombNo) {
         this.bombNo = bombNo;
     }
 
