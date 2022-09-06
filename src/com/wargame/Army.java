@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Army {
-//    private Soldier[] soldiers;
     private ArrayList<Soldier> soldiers;
-//    private Gun[] guns;
 
     public Army() {
 //        guns = new Gun[maxGuns];
