@@ -4,9 +4,11 @@ public abstract class Weapon {
     String weaponNo;
     private int bullets;
     private boolean active = true;
-    public Weapon(String weaponNo, int bullets) {
+    private String type;
+    public Weapon(String weaponNo, int bullets, String type) {
         this.weaponNo = weaponNo;
         this.bullets = bullets;
+        this.type = type;
 
         if(bullets < 1)
             this.setActive(false);
@@ -26,7 +28,6 @@ public abstract class Weapon {
 
     public void gunShoot(){
         this.bullets--;
-        System.out.println("Gun " + this.weaponNo + " shooting" );
     }
 
     public void fireMissiles(){

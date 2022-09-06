@@ -1,11 +1,12 @@
 package com.wargame;
 
 public class Jet extends Weapon {
-    int missiles;
-    String jetNo;
+    private int missiles;
+    private String jetNo;
+    private String type;
 
-    public Jet(String jetNo, int missiles){
-        super(jetNo, missiles);
+    public Jet(String jetNo, int missiles, String type){
+        super(jetNo, missiles, type);
     }
 
     public int getMissiles() {

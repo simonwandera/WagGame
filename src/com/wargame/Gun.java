@@ -4,8 +4,8 @@ public class Gun extends Weapon {
     int bullets;
     String gunNumber;
 
-    public Gun(String gunNumber, int bullets) {
-        super(gunNumber, bullets);
+    public Gun(String gunNumber, int bullets, String type) {
+        super(gunNumber, bullets, type);
 
     }
     public int getBullets() {

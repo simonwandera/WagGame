@@ -45,7 +45,6 @@ public class WarGameWorld {
         return true;
     }
 
-
     private void runGame() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
