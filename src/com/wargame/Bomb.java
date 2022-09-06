@@ -1,6 +1,6 @@
 package com.wargame;
 
-public class Tank {
+public class Bomb {
     private String tankNumber;
     private String model; // T-72
     private int shell;
@@ -9,7 +9,7 @@ public class Tank {
     private Gun gun;
 
 
-    public Tank(String tankNumber, String model, int shell, String size) {
+    public Bomb(String tankNumber, String model, int shell, String size) {
         this.tankNumber = tankNumber;
         this.model = model;
         this.shell = shell;

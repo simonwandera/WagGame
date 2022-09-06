@@ -10,7 +10,7 @@ public class Army {
 //    private Gun[] guns;
     private ArrayList<Gun> guns;
 //    private Tank[] tanks;
-    private ArrayList<Tank> tanks;
+    private ArrayList<Bomb> tanks;
 //    private Jet[] jets;
     private ArrayList<Jet> jets;
     private static final int maxGuns= 100;
@@ -60,11 +60,11 @@ public class Army {
         this.guns = guns;
     }
 
-    public ArrayList<Tank> getTanks() {
+    public ArrayList<Bomb> getTanks() {
         return tanks;
     }
 
-    public void setTanks(ArrayList<Tank> tanks) {
+    public void setTanks(ArrayList<Bomb> tanks) {
         this.tanks = tanks;
     }
 

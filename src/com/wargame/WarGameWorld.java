@@ -18,15 +18,11 @@ public class WarGameWorld {
         ally = new Army();
         enemy = new Army();
         // 1000 soldiers per army
-//        Soldier[] allySoldiers = new Soldier[maxSoldiers];
-//        Soldier[] enemySoldiers = new Soldier[maxSoldiers];
 
         ArrayList<Soldier> allySoldiers = new ArrayList<>();
         ArrayList<Soldier> enemySoldiers = new ArrayList<>();
 
         for (int k = 0; k < maxSoldiers; k++) {
-//            allySoldiers[k] = new Soldier("ALLY_00" + k);
-//            enemySoldiers[k] = new Soldier("ENEMY_00" + k);
 
             allySoldiers.add(new Soldier("ALLY_00" + k));
             enemySoldiers.add(new Soldier("ENEMY_00" + k));

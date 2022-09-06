@@ -3,7 +3,6 @@ package com.wargame;
 public class Gun {
     int bullets;
     int maxBullets;
-    char shootingMode; // S for single, A for automatic 5 bullets (per shot)
     String gunSize;
 
     public String getGunSize() {
@@ -18,41 +17,12 @@ public class Gun {
         bullets = maxBullets;
     }
 
-    public char getShootingMode() {
-        return shootingMode;
-    }
-
-    public void setShootingMode(char shootingMode) {
-
-        this.shootingMode = shootingMode;
-    }
-
-    public void changeShootingMode() {
-        if (shootingMode == 'S')
-            this.setShootingMode('A');
-        else
-            this.setShootingMode('S');
-    }
 
     public Gun(String size, int bullets) {
-        this.shootingMode = 'S';
         this.maxBullets = 5;
         reloadBullets();
         this.gunSize = size;
         this.bullets = bullets;
-    }
-    public void shootBullets() {
-        if (bullets > 0)
-        {
-            if (shootingMode == 'S'){
-                bullets --;
-                System.out.println("-");
-            }
-            else {
-                bullets -= 5;
-                System.out.println("-----");
-            }
-        }
     }
 
     public void shootMissiles() {
