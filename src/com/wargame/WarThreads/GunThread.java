@@ -12,7 +12,6 @@ public class GunThread implements Runnable{
 
     ArrayList<Soldier> allyWithGuns = new ArrayList<>();
     ArrayList<Soldier> enemyWithGuns = new ArrayList<>();
-
     String shooter;
     Difficulty difficulty;
 
@@ -37,28 +36,13 @@ public class GunThread implements Runnable{
         });
     }
 
-    public boolean allSoldiersAreDead(ArrayList<Soldier> soldiers) {
-        for (int k = 0; k < soldiers.size(); k ++)
-            if (soldiers.get(k).isAlive())
-                return false;
-        return true;
-    }
-
-    public boolean noWeaponHasBullets(ArrayList<Soldier> soldiers) {
-
-        for (int k = 0; k < soldiers.size(); k++)
-            if (soldiers.get(k).getWeapon().isActive())
-                return false;
-        return true;
-    }
-
     private void startFiring() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
         if (this.shooter.equals("enemy")) {
 
             // enemy shooting
-            for (int k = 0; k < 5; k++) {
+            for (int k = 0; k < 4; k++) {
                 int soldierIndex = new Random().nextInt(enemyWithGuns.size());
                 if (enemyWithGuns.get(soldierIndex).getWeapon().isActive() && enemyWithGuns.get(soldierIndex).isAlive())
                     enemyWithGuns.get(soldierIndex).shoot();
@@ -66,19 +50,19 @@ public class GunThread implements Runnable{
                     enemyWithGuns.get(soldierIndex).setAlive(false);
             }
             // ally shooting
-            for (int k = 0; k < 5; k++) {
-                int soldierIndex = new Random().nextInt(allyWithGuns.size());
+            for (int k = 0; k < 4; k++) {
+                int soldierIndex = new Random().nextInt(WarGameWorld.ally.getSoldiers().size());
                 choice = new Random().nextInt(10);
 
-               if(difficulty == Difficulty.SIMPLE){
-                   if (choice > 0 && allyWithGuns.get(soldierIndex).isAlive())
-                       allyWithGuns.get(soldierIndex).shot();
-               }else if (difficulty == Difficulty.HARD){
-                   if (choice > 4 && allyWithGuns.get(soldierIndex).isAlive())
-                       allyWithGuns.get(soldierIndex).shot();
-               }else if (difficulty == Difficulty.EXTREME){
-                   if (choice > 7 && allyWithGuns.get(soldierIndex).isAlive())
-                       allyWithGuns.get(soldierIndex).shot();
+               if(difficulty.equals(Difficulty.SIMPLE)){
+                   if (choice >= 0 && WarGameWorld.ally.getSoldiers().get(soldierIndex).isAlive())
+                       WarGameWorld.ally.getSoldiers().get(soldierIndex).shot();
+               }else if (difficulty.equals(Difficulty.HARD)){
+                   if (choice >= 4 && WarGameWorld.ally.getSoldiers().get(soldierIndex).isAlive())
+                       WarGameWorld.ally.getSoldiers().get(soldierIndex).shot();
+               }else if (difficulty.equals(Difficulty.EXTREME)){
+                   if (choice >= 7 && WarGameWorld.ally.getSoldiers().get(soldierIndex).isAlive())
+                       WarGameWorld.ally.getSoldiers().get(soldierIndex).shot();
                }
             }
 
@@ -94,20 +78,20 @@ public class GunThread implements Runnable{
             }
             // ally
             for (int k = 0; k < 10; k ++) {
-                int soldierIndex = new Random().nextInt(enemyWithGuns.size());
+                int soldierIndex = new Random().nextInt(WarGameWorld.enemy.getSoldiers().size());
                 choice = new Random().nextInt(10);
 
-                if(difficulty == Difficulty.SIMPLE){
-                    if (choice > 0 && enemyWithGuns.get(soldierIndex).isAlive())
-                        enemyWithGuns.get(soldierIndex).shot();
-                } else if (difficulty == Difficulty.HARD) {
-                    if (choice > 4 && enemyWithGuns.get(soldierIndex).isAlive())
-                        enemyWithGuns.get(soldierIndex).shot();
+                if(difficulty.equals(Difficulty.SIMPLE)){
+                    if (choice >= 0 && WarGameWorld.enemy.getSoldiers().get(soldierIndex).isAlive())
+                        WarGameWorld.enemy.getSoldiers().get(soldierIndex).shot();
 
-                } else if (difficulty == Difficulty.EXTREME) {
-                    if (choice > 5 && enemyWithGuns.get(soldierIndex).isAlive())
-                        enemyWithGuns.get(soldierIndex).shot();
+                } else if (difficulty.equals(Difficulty.HARD)) {
+                    if (choice >= 4 && WarGameWorld.enemy.getSoldiers().get(soldierIndex).isAlive())
+                        WarGameWorld.enemy.getSoldiers().get(soldierIndex).shot();
 
+                } else if (difficulty.equals(Difficulty.EXTREME)) {
+                    if (choice >= 7 && WarGameWorld.enemy.getSoldiers().get(soldierIndex).isAlive())
+                        WarGameWorld.enemy.getSoldiers().get(soldierIndex).shot();
                 }
             }
         }
@@ -116,13 +100,6 @@ public class GunThread implements Runnable{
     @Override
     public void run() {
         getSoldiersWithGuns();
-
-        while (true) {
-            if (allSoldiersAreDead(allyWithGuns) || allSoldiersAreDead(enemyWithGuns) || noWeaponHasBullets(enemyWithGuns) || noWeaponHasBullets(allyWithGuns)) {
-                System.out.println("Exiting ...");
-                break;
-            }
-            startFiring();
-        }
+        startFiring();
     }
 }
