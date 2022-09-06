@@ -21,8 +21,5 @@ public class Gun extends Weapon {
         return super.isActive();
     }
 
-    public void shoot(){
-        this.bullets--;
-        System.out.println("Gun " + this.gunNumber + " shooting" );
-    }
+
 }

@@ -24,8 +24,19 @@ public class Soldier {
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public void shoot(){
+        if (weapon instanceof Gun)
+            weapon.gunShoot();
+        else if (weapon instanceof Jet)
+            weapon.fireMissiles();
+        else if ( weapon instanceof Bomb)
+            weapon.explode();
+    }
     public void shot() {
         this.alive = false;
         System.out.println(this.militaryId + " Was just killed");
     }
+
+
 }

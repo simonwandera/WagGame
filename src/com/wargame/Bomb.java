@@ -8,7 +8,4 @@ public class Bomb extends Weapon {
         super(bombNo);
     }
 
-    public void explode(){
-        super.setActive(false);
-    }
 }

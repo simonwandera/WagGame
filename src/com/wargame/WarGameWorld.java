@@ -48,6 +48,7 @@ public class WarGameWorld {
         return true;
     }
 
+
     private void runGame() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
@@ -55,8 +56,8 @@ public class WarGameWorld {
             // enemy
             for (int k = 0; k < 10; k ++) {
                 int soldierIndex = new Random().nextInt(enemy.getSoldiers().size());
-                if (enemy.getSoldiers().get(soldierIndex).getBullets() > 0 && enemy.getSoldiers().get(soldierIndex).isAlive())
-                    enemy.getSoldiers().get(soldierIndex).shoot();
+                if (enemy.getSoldiers().get(soldierIndex).getWeapon().isActive() && enemy.getSoldiers().get(soldierIndex).isAlive())
+                    enemy.getSoldiers().get(soldierIndex).getWeapon();
                 else
                     enemy.getSoldiers().get(soldierIndex).setLife(false);
             }
