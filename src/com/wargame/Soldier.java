@@ -17,6 +17,10 @@ public class Soldier {
         return alive;
     }
 
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
     public void assignWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
@@ -34,9 +38,8 @@ public class Soldier {
             weapon.explode();
     }
     public void shot() {
-        this.alive = false;
+        setAlive(false);
         System.out.println(this.militaryId + " Was just killed");
     }
-
 
 }

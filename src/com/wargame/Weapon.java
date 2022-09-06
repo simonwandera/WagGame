@@ -3,7 +3,7 @@ package com.wargame;
 public abstract class Weapon {
     String weaponNo;
     private int bullets;
-    private boolean active;
+    private boolean active = true;
     public Weapon(String weaponNo, int bullets) {
         this.weaponNo = weaponNo;
         this.bullets = bullets;

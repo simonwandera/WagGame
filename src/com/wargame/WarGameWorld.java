@@ -39,12 +39,9 @@ public class WarGameWorld {
 
     private boolean noWeaponHasBullets(Army army) {
 
-        for (int k = 0; k < army.getSoldiers().size(); k++) {
+        for (int k = 0; k < army.getSoldiers().size(); k++)
             if (army.getSoldiers().get(k).getWeapon().isActive())
                 return false;
-            else
-                return true;
-        }
         return true;
     }
 
@@ -57,9 +54,9 @@ public class WarGameWorld {
             for (int k = 0; k < 10; k ++) {
                 int soldierIndex = new Random().nextInt(enemy.getSoldiers().size());
                 if (enemy.getSoldiers().get(soldierIndex).getWeapon().isActive() && enemy.getSoldiers().get(soldierIndex).isAlive())
-                    enemy.getSoldiers().get(soldierIndex).getWeapon();
+                    enemy.getSoldiers().get(soldierIndex).shoot();
                 else
-                    enemy.getSoldiers().get(soldierIndex).setLife(false);
+                    enemy.getSoldiers().get(soldierIndex).setAlive(false);
             }
             // ally
             for (int k = 0; k < 10; k ++) {
@@ -70,13 +67,15 @@ public class WarGameWorld {
                     ally.getSoldiers().get(soldierIndex).shot();
             }
         }
+
+
         else {
             for (int k = 0; k < 10; k ++) {
                 int soldierIndex = new Random().nextInt(ally.getSoldiers().size() - 1);
-                if (ally.getSoldiers().get(soldierIndex).getBullets() > 0 && ally.getSoldiers().get(soldierIndex).isAlive())
+                if (ally.getSoldiers().get(soldierIndex).getWeapon().isActive() && ally.getSoldiers().get(soldierIndex).isAlive())
                     ally.getSoldiers().get(soldierIndex).shoot();
                 else
-                    ally.getSoldiers().get(soldierIndex).setLife(false);
+                    ally.getSoldiers().get(soldierIndex).setAlive(false);
             }
             // ally
             for (int k = 0; k < 10; k ++) {
@@ -108,6 +107,11 @@ public class WarGameWorld {
         while (true) {
 
             if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)) {
+
+                System.out.println(allSoldiersAreDead(ally) + " All soldiers are dead ally");
+                System.out.println(allSoldiersAreDead(enemy) + " All soldiers are dead enemy");
+                System.out.println(noWeaponHasBullets(ally) + " No weapon has bullets ally");
+                System.out.println(noWeaponHasBullets(enemy) + " No weapon has bullets enemy");
 
                 System.out.println("Exit...");
                 break;
