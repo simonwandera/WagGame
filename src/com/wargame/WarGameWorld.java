@@ -30,6 +30,24 @@ public class WarGameWorld {
         enemy.setSoldiers(enemySoldiers);
     }
 
+    private boolean allSoldiersAreDead(Army army) {
+        for (int k = 0; k < army.getSoldiers().size(); k ++)
+            if (army.getSoldiers().get(k).isAlive())
+                return false;
+        return true;
+    }
+
+    private boolean noWeaponHasBullets(Army army) {
+
+        for (int k = 0; k < army.getSoldiers().size(); k++) {
+            if (army.getSoldiers().get(k).getWeapon().isActive())
+                return false;
+            else
+                return true;
+        }
+        return true;
+    }
+
     private void runGame() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
@@ -67,24 +85,6 @@ public class WarGameWorld {
                     enemy.getSoldiers().get(soldierIndex).shot();
             }
         }
-    }
-
-    private boolean allSoldiersAreDead(Army army) {
-        for (int k = 0; k < army.getSoldiers().size(); k ++)
-            if (army.getSoldiers().get(k).isAlive())
-                return false;
-        return true;
-    }
-
-    private boolean noWeaponHasBullets(Army army) {
-
-        for (int k = 0; k < army.getSoldiers().size(); k++) {
-            if (army.getSoldiers().get(k).getWeapon().isActive())
-                return false;
-            else
-                return true;
-        }
-        return true;
     }
 
     private int deadSoldiers(Army army){
