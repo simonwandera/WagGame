@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class WarGameWorld {
-    private static int maxSoldiers = 100;
+    private static int maxSoldiers = 10000;
     public static Army ally;
     public static Army enemy;
 
@@ -43,7 +43,7 @@ public class WarGameWorld {
     public boolean noWeaponHasBullets(Army army) {
 
         for (int k = 0; k < army.getSoldiers().size(); k++)
-            if (army.getSoldiers().get(k).getWeapon().isActive())
+            if (army.getSoldiers().get(k).getWeapon().isActive() && army.getSoldiers().get(k).isAlive())
                 return false;
         return true;
     }
@@ -79,8 +79,8 @@ public class WarGameWorld {
                 break;
 
             }
-            Thread t1 = new Thread(new GunThread("ally", Difficulty.EXTREME));
-            Thread t2 = new Thread(new GunThread("enemy", Difficulty.EXTREME));
+            Thread t1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
+            Thread t2 = new Thread(new GunThread("enemy", Difficulty.SIMPLE));
 
             t2.start();
             t1.start();
