@@ -16,6 +16,7 @@ public class Army {
 
     private void assignWeapon() {
 
+
     }
 
     public void setSoldiers(ArrayList<Soldier> soldiers) {
