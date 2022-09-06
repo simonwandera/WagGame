@@ -15,9 +15,12 @@ public class Army {
     }
 
     private void assignWeapon() {
+        for(int i=0; i< (soldiers.size()/2); i++) {
+
+        }
 
 
-    }
+        }
 
     public void setSoldiers(ArrayList<Soldier> soldiers) {
         this.soldiers = soldiers;
