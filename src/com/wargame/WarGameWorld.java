@@ -106,6 +106,8 @@ public class WarGameWorld {
         // - Control the game. Determine, when the game ends...
         // [1 - All soldiers are dead,
         // [2 - No weapon has bullets
+
+
         while (true) {
 
             if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)) {
@@ -122,10 +124,8 @@ public class WarGameWorld {
 
 //            this.runGame();
 
-            Thread thread = new Thread(new GunThread());
-            thread.start();
 
-            Thread.sleep(2000);
+
         }
     }
 }
