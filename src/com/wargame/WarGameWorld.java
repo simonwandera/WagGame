@@ -1,5 +1,6 @@
 package com.wargame;
 
+import com.wargame.WarThreads.BombThread;
 import com.wargame.WarThreads.GunThread;
 
 import java.util.ArrayList;
@@ -79,13 +80,22 @@ public class WarGameWorld {
                 break;
 
             }
-            Thread t1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
-            Thread t2 = new Thread(new GunThread("enemy", Difficulty.SIMPLE));
+            Thread gun1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
+            Thread gun2 = new Thread(new GunThread("enemy", Difficulty.SIMPLE));
 
-            t2.start();
-            t1.start();
-            t1.join();
-            t2.join();
+            Thread bomb1 = new Thread(new BombThread("ally", Difficulty.SIMPLE));
+            Thread bomb2 = new Thread(new BombThread("enemy", Difficulty.SIMPLE));
+
+            gun1.start();
+            gun2.start();
+            bomb1.start();
+            bomb2.start();
+
+            gun1.join();
+            gun2.join();
+            bomb1.join();
+            bomb2.join();
+
         }
 
     }
