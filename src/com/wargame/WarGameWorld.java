@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 public class WarGameWorld {
     private static int maxSoldiers = 16;
-    private Army ally;
-    private Army enemy;
+    public static Army ally;
+    public static Army enemy;
+
     public WarGameWorld() {
         this.createArmy();
     }
