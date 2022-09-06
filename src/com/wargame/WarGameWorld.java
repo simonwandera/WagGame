@@ -5,14 +5,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class WarGameWorld {
-    private static int maxSoldiers = 20;
+    private static int maxSoldiers = 16;
     private Army ally;
     private Army enemy;
     public WarGameWorld() {
-        this.setupGame();
+        this.createArmy();
     }
 
-    private void setupGame() {
+    private void createArmy() {
         // Create 2 armies (Ally and Enemy)
         ally = new Army();
         enemy = new Army();
@@ -79,8 +79,10 @@ public class WarGameWorld {
     private boolean noWeaponHasBullets(Army army) {
 
         for (int k = 0; k < army.getSoldiers().size(); k++) {
-            if (army.getSoldiers().get(k).gunHasBullets())
+            if (army.getSoldiers().get(k).getWeapon().isActive())
                 return false;
+            else
+                return true;
         }
         return true;
     }

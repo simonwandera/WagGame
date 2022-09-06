@@ -5,8 +5,8 @@ public class Gun extends Weapon {
     String gunNumber;
 
     public Gun(String gunNumber, int bullets) {
-        this.bullets = bullets;
-        this.gunNumber = gunNumber;
+        super(gunNumber, bullets);
+
     }
     public int getBullets() {
         return bullets;
@@ -16,11 +16,9 @@ public class Gun extends Weapon {
         this.bullets = bullets;
     }
 
-    public boolean isLoaded(){
-        if(this.bullets > 0)
-            return true;
-        else;
-        return false;
+    @Override
+    public boolean isActive() {
+        return super.isActive();
     }
 
     public void shoot(){

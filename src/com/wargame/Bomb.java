@@ -5,14 +5,10 @@ public class Bomb extends Weapon {
     private boolean loaded = true;
 
     public Bomb(String bombNo) {
-        this.bombNo = bombNo;
+        super(bombNo);
     }
 
     public void explode(){
-        this.loaded = false;
-    }
-
-    public boolean isLoaded(){
-        return loaded;
+        super.setActive(false);
     }
 }

@@ -21,6 +21,9 @@ public class Soldier {
         this.weapon = weapon;
     }
 
+    public Weapon getWeapon() {
+        return weapon;
+    }
     public void shot() {
         this.alive = false;
         System.out.println(this.militaryId + " Was just killed");

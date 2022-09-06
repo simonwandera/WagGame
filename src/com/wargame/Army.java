@@ -6,10 +6,6 @@ import java.util.Random;
 public class Army {
     private ArrayList<Soldier> soldiers;
 
-    public Army() {
-//        guns = new Gun[maxGuns];
-    }
-
     public ArrayList<Soldier> getSoldiers() {
         return soldiers;
     }
@@ -26,7 +22,6 @@ public class Army {
         for (int i=(soldiers.size() * 3/4); i< soldiers.size(); i++){
             soldiers.get(i).assignWeapon(new Bomb("bomb" + i));
         }
-
     }
 
     public void setSoldiers(ArrayList<Soldier> soldiers) {

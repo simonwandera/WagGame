@@ -5,8 +5,7 @@ public class Jet extends Weapon {
     String jetNo;
 
     public Jet(String jetNo, int missiles){
-        this.missiles = missiles;
-        this.jetNo = jetNo;
+        super(jetNo, missiles);
     }
 
     public int getMissiles() {
