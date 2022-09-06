@@ -44,6 +44,7 @@ public class GunThread implements Runnable{
     private synchronized void startFiring() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
+
         if (this.shooter.equals("enemy")) {
 
             // enemy shooting
@@ -70,7 +71,6 @@ public class GunThread implements Runnable{
                     enemyWithGuns.get(soldierIndex).setAlive(false);
             }
             // ally shooting
-
         }
 
         else if(this.shooter.equals("ally")) {
