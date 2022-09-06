@@ -8,7 +8,6 @@ public class WarGameWorld {
     private static int maxSoldiers = 20;
     private Army ally;
     private Army enemy;
-    private boolean runWithLess = false;
     public WarGameWorld() {
         this.setupGame();
     }
@@ -115,22 +114,6 @@ public class WarGameWorld {
 
             Scanner sc = new Scanner(System.in);
 
-            if(!runWithLess){
-                if(maxSoldiers/2 < deadSoldiers(ally)){
-                    System.out.println("Half of the soldiers are dead, would you like to add Soldiers? (Y/N)");
-                    String answer = sc.nextLine();
-
-                    if (answer.toLowerCase().equals("y")){
-                        System.out.println("Enter the number of soldiers to add");
-                        maxSoldiers = sc.nextInt();
-                        this.setupGame();
-                    }else if(answer.toLowerCase().equals("n")) {
-                        runWithLess = true;
-                    }else {
-                        break;
-                    }
-                }
-            }
             Thread.sleep(2000);
         }
     }

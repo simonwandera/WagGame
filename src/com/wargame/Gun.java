@@ -16,7 +16,7 @@ public class Gun extends Weapon {
         this.bullets = bullets;
     }
 
-    public boolean loaded(){
+    public boolean isLoaded(){
         if(this.bullets > 0)
             return true;
         else;
