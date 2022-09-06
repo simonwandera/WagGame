@@ -120,7 +120,7 @@ public class WarGameWorld {
 
             }
 
-            this.runGame();
+//            this.runGame();
 
             Thread thread = new Thread(new GunThread());
             thread.start();
