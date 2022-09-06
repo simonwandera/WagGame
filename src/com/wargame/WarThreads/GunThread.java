@@ -27,8 +27,13 @@ public class GunThread implements Runnable{
         });
     }
 
+    public void startGunFire(){
+        
+    }
+
     @Override
     public void run() {
+        getSoldiersWithGuns();
 
 
     }

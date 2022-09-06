@@ -1,5 +1,7 @@
 package com.wargame;
 
+import com.wargame.WarThreads.GunThread;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -31,14 +33,14 @@ public class WarGameWorld {
         enemy.setSoldiers(enemySoldiers);
     }
 
-    private boolean allSoldiersAreDead(Army army) {
+    public boolean allSoldiersAreDead(Army army) {
         for (int k = 0; k < army.getSoldiers().size(); k ++)
             if (army.getSoldiers().get(k).isAlive())
                 return false;
         return true;
     }
 
-    private boolean noWeaponHasBullets(Army army) {
+    public boolean noWeaponHasBullets(Army army) {
 
         for (int k = 0; k < army.getSoldiers().size(); k++)
             if (army.getSoldiers().get(k).getWeapon().isActive())
@@ -115,11 +117,13 @@ public class WarGameWorld {
 
                 System.out.println("Exit...");
                 break;
+
             }
 
             this.runGame();
 
-            Scanner sc = new Scanner(System.in);
+            Thread thread = new Thread(new GunThread());
+            thread.start();
 
             Thread.sleep(2000);
         }
