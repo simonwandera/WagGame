@@ -41,7 +41,7 @@ public class WarGameWorld {
                 if (enemy.getSoldiers().get(soldierIndex).getBullets() > 0 && enemy.getSoldiers().get(soldierIndex).isAlive())
                     enemy.getSoldiers().get(soldierIndex).shoot();
                 else
-                    enemy.getSoldiers().get(soldierIndex).setAlive(false);
+                    enemy.getSoldiers().get(soldierIndex).setLife(false);
             }
             // ally
             for (int k = 0; k < 10; k ++) {
@@ -58,7 +58,7 @@ public class WarGameWorld {
                 if (ally.getSoldiers().get(soldierIndex).getBullets() > 0 && ally.getSoldiers().get(soldierIndex).isAlive())
                     ally.getSoldiers().get(soldierIndex).shoot();
                 else
-                    ally.getSoldiers().get(soldierIndex).setAlive(false);
+                    ally.getSoldiers().get(soldierIndex).setLife(false);
             }
             // ally
             for (int k = 0; k < 10; k ++) {

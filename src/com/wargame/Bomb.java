@@ -1,6 +1,6 @@
 package com.wargame;
 
-public class Bomb {
+public class Bomb extends Weapon {
     private int bombNo;
     private boolean loaded = true;
 

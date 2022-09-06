@@ -1,6 +1,6 @@
 package com.wargame;
 
-public class Gun {
+public class Gun extends Weapon {
     int bullets;
     String gunNumber;
 
