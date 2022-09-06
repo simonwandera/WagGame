@@ -2,9 +2,11 @@ package com.wargame;
 
 public class Gun {
     int bullets;
+    String gunNumber;
 
-    public Gun(String size, int bullets) {
+    public Gun(String size, int bullets, String gunNumber) {
         this.bullets = bullets;
+        this.gunNumber = gunNumber;
     }
     public int getBullets() {
         return bullets;
@@ -13,8 +15,9 @@ public class Gun {
     public void setBullets(int bullets) {
         this.bullets = bullets;
     }
-    
+
     public void shoot(){
         this.bullets--;
+        System.out.println("Gun " + this.gunNumber + " shooting" );
     }
 }
