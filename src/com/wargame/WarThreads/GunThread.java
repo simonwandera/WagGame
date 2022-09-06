@@ -1,5 +1,6 @@
 package com.wargame.WarThreads;
 
+import com.wargame.Difficulty;
 import com.wargame.Gun;
 import com.wargame.Soldier;
 import com.wargame.WarGameWorld;
@@ -13,10 +14,11 @@ public class GunThread implements Runnable{
     ArrayList<Soldier> enemyWithGuns = new ArrayList<>();
 
     String shooter;
+    Difficulty difficulty;
 
-    public GunThread(String shooter) {
+    public GunThread(String shooter, Difficulty difficulty) {
         this.shooter = shooter;
-
+        this.difficulty = difficulty;
     }
 
     public synchronized void getSoldiersWithGuns(){
@@ -54,8 +56,9 @@ public class GunThread implements Runnable{
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
         if (this.shooter == "enemy") {
+
             // enemy shooting
-            for (int k = 0; k < 5; k ++) {
+            for (int k = 0; k < 5; k++) {
                 int soldierIndex = new Random().nextInt(enemyWithGuns.size());
                 if (enemyWithGuns.get(soldierIndex).getWeapon().isActive() && enemyWithGuns.get(soldierIndex).isAlive())
                     enemyWithGuns.get(soldierIndex).shoot();
@@ -63,13 +66,22 @@ public class GunThread implements Runnable{
                     enemyWithGuns.get(soldierIndex).setAlive(false);
             }
             // ally shooting
-            for (int k = 0; k < 5; k ++) {
+            for (int k = 0; k < 5; k++) {
                 int soldierIndex = new Random().nextInt(allyWithGuns.size());
                 choice = new Random().nextInt(10);
 
-                if (choice % 2 == 0 && allyWithGuns.get(soldierIndex).isAlive())
-                    allyWithGuns.get(soldierIndex).shot();
+               if(difficulty == Difficulty.SIMPLE){
+                   if (choice > 0 && allyWithGuns.get(soldierIndex).isAlive())
+                       allyWithGuns.get(soldierIndex).shot();
+               }else if (difficulty == Difficulty.HARD){
+                   if (choice > 4 && allyWithGuns.get(soldierIndex).isAlive())
+                       allyWithGuns.get(soldierIndex).shot();
+               }else if (difficulty == Difficulty.EXTREME){
+                   if (choice > 7 && allyWithGuns.get(soldierIndex).isAlive())
+                       allyWithGuns.get(soldierIndex).shot();
+               }
             }
+
         }
 
         else if(this.shooter == "ally") {
@@ -84,6 +96,8 @@ public class GunThread implements Runnable{
             for (int k = 0; k < 10; k ++) {
                 int soldierIndex = new Random().nextInt(enemyWithGuns.size());
                 choice = new Random().nextInt(10);
+
+
                 if (choice % 2 == 0 && enemyWithGuns.get(soldierIndex).isAlive())
                     enemyWithGuns.get(soldierIndex).shot();
             }

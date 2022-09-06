@@ -121,11 +121,14 @@ public class WarGameWorld {
                 break;
 
             }
-
 //            this.runGame();
-
-
-
         }
+
+        Thread t1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
+        Thread t2 = new Thread(new GunThread("enemy", Difficulty.SIMPLE));
+
+
+
+
     }
 }
