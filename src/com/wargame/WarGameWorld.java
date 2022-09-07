@@ -86,11 +86,11 @@ public class WarGameWorld {
 
         if(Collections.frequency(winner, "enemy") > Collections.frequency(winner, "ally")){
             String str = player + ", lost" + ", 0";
-            WarGame.writeToFile(WarGame.PATH, str);
+            WarGame.writeToFile(WarGame.gamesPath, str);
             return "enemy";
         }else {
             String str = player + ", won" + ", 100";
-            WarGame.writeToFile(WarGame.PATH, str);
+            WarGame.writeToFile(WarGame.gamesPath, str);
             return "ally";
         }
 
