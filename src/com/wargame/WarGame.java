@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 public class WarGame {
@@ -20,26 +19,59 @@ public class WarGame {
         System.out.println("**************************************");
 
         Scanner scanner = new Scanner(System.in);
-        
 
         System.out.println("What is your name");
         String player = scanner.nextLine();
 
-        System.out.println("Which country do you come from");
+        if(playerExists(player)){
+            play(player);
+        }else {
 
-        String country = scanner.nextLine();
+            System.out.println("\nPlease proceed with the registration");
+            Thread.sleep(2000);
+            System.out.println("Which country do you come from");
 
-        String profile = player + "," + country;
+            String country = scanner.nextLine();
+            String profile = player + "," + country + "\n";
+            writeToFile(playersPath, profile);
 
-        writeToFile(playersPath, profile);
+            Thread.sleep(2000);
+            System.out.println("Registered successfully");
 
+        }
+    }
 
+    public static void play(String player) throws InterruptedException {
 
+        Scanner scanner = new Scanner(System.in);
 
-        WarGameWorld game = new WarGameWorld(player);
-//        game.run();
+        System.out.println("Welcome back " +player + "!");
+        System.out.println("You have a total of " + getPoints(player) + " points");
 
-        System.out.println("Winner " + game.run());
+        System.out.println("\nWould you like to play again?");
+
+        System.out.println("\n Y/N");
+        String choice = scanner.nextLine();
+
+        if(choice.toLowerCase().equals("y")){
+            System.out.println("Select level \n S - Simple \t H - hard \t  E - extreme");
+            String level = scanner.nextLine();
+
+            if (level.toLowerCase().equals("s")){
+                Difficulty mode = Difficulty.SIMPLE;
+            }else if(level.toLowerCase().equals("h")){
+                Difficulty mode = Difficulty.HARD;
+            } else if (level.toLowerCase().equals('e')) {
+                Difficulty mode = Difficulty.EXTREME;
+            }
+
+            WarGameWorld game = new WarGameWorld(player);
+            System.out.println("Winner " + game.run());
+
+        }else {
+            System.out.println("Exiting...");
+            System.exit(1000);
+        }
 
     }
 
@@ -64,6 +96,16 @@ public class WarGame {
             }
         }
         return false;
+    }
+
+    public static int getPoints(String player){
+        int points = 0;
+        for (int i = 0; i< readFile(gamesPath).size(); i++){
+            if(readFile(gamesPath).get(i).get(0).equals(player)){
+                points = points + Integer.parseInt(readFile(gamesPath).get(i).get(2).trim());
+            }
+        }
+        return points;
     }
 
     private static ArrayList<ArrayList<String>> readFile(String PATH){

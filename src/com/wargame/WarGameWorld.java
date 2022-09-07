@@ -85,11 +85,11 @@ public class WarGameWorld {
         jet2.join();
 
         if(Collections.frequency(winner, "enemy") > Collections.frequency(winner, "ally")){
-            String str = player + ", lost" + ", 0";
+            String str = player + ", lost" + ", 0 \n";
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "enemy";
         }else {
-            String str = player + ", won" + ", 100";
+            String str = player + ", won" + ", 100 \n";
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "ally";
         }
