@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class WarGame {
 
@@ -151,16 +148,20 @@ public class WarGame {
         ArrayList<String> scoresList = new ArrayList<>();
         scoresList.addAll(hashSet);
 
+        HashMap<String, Integer> board = new HashMap<>();
+
         for (int i = 0; i< scoresList.size(); i++){
             int points = 0;
             for (int j =0; j< leaderboard.size(); j++){
-//                if (leaderboard.get(i).get(0).equals(scoresList.get(j))){
-//                    points = points + Integer.parseInt(leaderboard.get(i).get(2).trim());
-//                }
-
-                if()
+                if (leaderboard.get(j).get(0).equals(scoresList.get(i))){
+                    points = points + Integer.parseInt(leaderboard.get(j).get(2).trim());
+                }
             }
+            board.put(scoresList.get(i), points);
         }
 
+        System.out.println(scoresList);
+        System.out.println(leaderboard);
+        System.out.println(board);
     }
 }
