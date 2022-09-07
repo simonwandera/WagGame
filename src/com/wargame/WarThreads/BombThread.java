@@ -32,6 +32,13 @@ public class BombThread implements Runnable{
         });
     }
 
+    public boolean allSoldiersAreDead(ArrayList<Soldier> army) {
+        for (int k = 0; k < army.size(); k ++)
+            if (army.get(k).isAlive())
+                return false;
+        return true;
+    }
+
     private synchronized void throwBomb() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
@@ -106,10 +113,18 @@ public class BombThread implements Runnable{
     public void run() {
 
         getSoldiersWithBomb();
-        if (noBombIsActive(allyWithBomb) || noBombIsActive(enemyWithBomb)){
-            Thread.currentThread().stop();
-        }else {
-            throwBomb();
+        while (true) {
+            if (noBombIsActive(allyWithBomb) || noBombIsActive(enemyWithBomb) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers()) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())) {
+                Thread.currentThread().stop();
+                break;
+            } else {
+                throwBomb();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }

@@ -41,6 +41,13 @@ public class GunThread implements Runnable{
         return true;
     }
 
+    public boolean allSoldiersAreDead(ArrayList<Soldier> army) {
+        for (int k = 0; k < army.size(); k ++)
+            if (army.get(k).isAlive())
+                return false;
+        return true;
+    }
+
     private synchronized void startFiring() {
         // randomize enemy or ally
         int choice = new Random().nextInt(20);
@@ -105,10 +112,26 @@ public class GunThread implements Runnable{
     @Override
     public void run() {
         getSoldiersWithGuns();
-        if (noGunHasBullets(allyWithGuns) || noGunHasBullets(enemyWithGuns)){
-            Thread.currentThread().stop();
-        }else {
-            startFiring();
+
+        while (true) {
+            if (noGunHasBullets(allyWithGuns) || noGunHasBullets(enemyWithGuns) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers()) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())) {
+
+                if(noGunHasBullets((allyWithGuns)) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())){
+                    WarGameWorld.gunWinner = "enemy";
+
+                }else if(noGunHasBullets((enemyWithGuns)) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())){
+                    WarGameWorld.gunWinner = "ally";
+                }
+                Thread.currentThread().stop();
+                break;
+            } else {
+                startFiring();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }

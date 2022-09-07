@@ -33,6 +33,13 @@ public class JetThread implements Runnable {
         });
     }
 
+    public boolean allSoldiersAreDead(ArrayList<Soldier> army) {
+        for (int k = 0; k < army.size(); k ++)
+            if (army.get(k).isAlive())
+                return false;
+        return true;
+    }
+
     public boolean noJetHasMissiles( ArrayList<Soldier> soldierWithJet) {
 
         for (int k = 0; k < soldierWithJet.size(); k++)
@@ -105,10 +112,18 @@ public class JetThread implements Runnable {
     @Override
     public void run() {
         getSoldiersWithJet();
-        if (noJetHasMissiles(allyWithJet) || noJetHasMissiles(enemyWithJet)){
-            Thread.currentThread().stop();
-        }else {
-            fireMissile();
+        while (true) {
+            if (noJetHasMissiles(allyWithJet) || noJetHasMissiles(enemyWithJet) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers()) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())) {
+                Thread.currentThread().stop();
+                break;
+            } else {
+                fireMissile();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }

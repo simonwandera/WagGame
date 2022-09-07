@@ -7,11 +7,13 @@ import com.wargame.WarThreads.JetThread;
 import java.util.ArrayList;
 
 public class WarGameWorld {
-    private static int maxSoldiers = 10000;
+    private static int maxSoldiers = 100;
     public static Army ally;
     public static Army enemy;
 
-    public static String winner;
+    public static String gunWinner;
+    public static String bombWinner;
+    public static String jetWinner;
 
     public WarGameWorld() {
         this.createArmy();
@@ -41,10 +43,6 @@ public class WarGameWorld {
                 return false;
         return true;
     }
-
-
-
-
     public boolean noWeaponHasBullets(Army army) {
 
         for (int k = 0; k < army.getSoldiers().size(); k++)
@@ -69,37 +67,23 @@ public class WarGameWorld {
         Thread jet1 = new Thread(new JetThread("ally", Difficulty.SIMPLE));
         Thread jet2 = new Thread(new JetThread("enemy", Difficulty.SIMPLE));
 
-        while (true) {
+        gun1.start();
+        gun2.start();
+        bomb1.start();
+        bomb2.start();
+        jet1.start();
+        jet2.start();
 
-            if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)) {
-
-                System.out.println(allSoldiersAreDead(ally) + " All soldiers are dead ally");
-                System.out.println(allSoldiersAreDead(enemy) + " All soldiers are dead enemy");
-                System.out.println(noWeaponHasBullets(ally) + " No weapon has bullets ally");
-                System.out.println(noWeaponHasBullets(enemy) + " No weapon has bullets enemy");
-
-                System.out.println("Exiting ...");
-                break;
-
-            }
+        gun1.join();
+        gun2.join();
+        bomb1.join();
+        bomb2.join();
+        jet1.join();
+        jet2.join();
 
 
-            gun1.start();
-            gun2.start();
-            bomb1.start();
-            bomb2.start();
+        System.out.println("Gun winner" + gunWinner);
 
-            jet1.start();
-            jet2.start();
-
-            gun1.join();
-            gun2.join();
-            bomb1.join();
-            bomb2.join();
-            jet1.join();
-            jet2.join();
-
-        }
 
         }
     }
