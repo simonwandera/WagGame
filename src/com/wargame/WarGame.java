@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class WarGame {
@@ -14,6 +15,7 @@ public class WarGame {
     public static String playersPath = "players.db";
     public static void main(String[] args) throws InterruptedException {
 
+        leaderBoard();
         System.out.println("**************************************");
         System.out.println("\t*************  WELCOME TO WARGAME 1.0 ***************");
         System.out.println("**************************************");
@@ -49,7 +51,7 @@ public class WarGame {
         System.out.println("Welcome back " +player + "!");
         System.out.println("You have a total of " + getPoints(player) + " points");
 
-        System.out.println("\nWould you like to play again?");
+        System.out.println("\nWould you like to play?");
 
         System.out.println("\n Y/N");
         String choice = scanner.nextLine();
@@ -83,7 +85,6 @@ public class WarGame {
             System.out.println("Exiting...");
             System.exit(1000);
         }
-
     }
 
 
@@ -136,5 +137,30 @@ public class WarGame {
             e.printStackTrace();
         }
         return allPlayers;
+    }
+
+    public static void leaderBoard(){
+        ArrayList<ArrayList<String>> leaderboard = new ArrayList<>(readFile(gamesPath));
+        HashSet<String> hashSet = new HashSet<>();
+
+        for (int i=0; i< leaderboard.size(); i++){
+            hashSet.add(leaderboard.get(i).get(0));
+        }
+        hashSet.add("enemy");
+
+        ArrayList<String> scoresList = new ArrayList<>();
+        scoresList.addAll(hashSet);
+
+        for (int i = 0; i< scoresList.size(); i++){
+            int points = 0;
+            for (int j =0; j< leaderboard.size(); j++){
+//                if (leaderboard.get(i).get(0).equals(scoresList.get(j))){
+//                    points = points + Integer.parseInt(leaderboard.get(i).get(2).trim());
+//                }
+
+                if()
+            }
+        }
+
     }
 }

@@ -93,6 +93,5 @@ public class WarGameWorld {
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "ally";
         }
-
-        }
     }
+}
