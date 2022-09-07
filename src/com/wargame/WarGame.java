@@ -37,6 +37,7 @@ public class WarGame {
 
             Thread.sleep(2000);
             System.out.println("Registered successfully");
+            play(player);
 
         }
     }
@@ -56,17 +57,27 @@ public class WarGame {
         if(choice.toLowerCase().equals("y")){
             System.out.println("Select level \n S - Simple \t H - hard \t  E - extreme");
             String level = scanner.nextLine();
+            WarGameWorld game = new WarGameWorld(player);
 
             if (level.toLowerCase().equals("s")){
                 Difficulty mode = Difficulty.SIMPLE;
+                if (game.run(mode).equals("ally"))
+                    System.out.println("\nYou won");
+                else
+                    System.out.println("\n You lost");
             }else if(level.toLowerCase().equals("h")){
                 Difficulty mode = Difficulty.HARD;
-            } else if (level.toLowerCase().equals('e')) {
+                if (game.run(mode).equals("ally"))
+                    System.out.println("\nYou won");
+                else
+                    System.out.println("\n You lost");
+            } else if (level.toLowerCase().equals("e")) {
                 Difficulty mode = Difficulty.EXTREME;
+                if (game.run(mode).equals("ally"))
+                    System.out.println("\nYou won");
+                else
+                    System.out.println("\n You lost");
             }
-
-            WarGameWorld game = new WarGameWorld(player);
-            System.out.println("Winner " + game.run());
 
         }else {
             System.out.println("Exiting...");

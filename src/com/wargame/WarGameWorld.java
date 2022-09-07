@@ -52,7 +52,7 @@ public class WarGameWorld {
         return true;
     }
 
-    public String run() throws InterruptedException {
+    public String run(Difficulty difficulty) throws InterruptedException {
         // - Setup the game [Soldiers, Army (Ally, Enemy), Weapon Arsenal]
         // - Run the game [ Soldiers shoot at enemy, Control Weapons + Arsenal ]
         // - Control the game. Determine, when the game ends...
@@ -61,13 +61,13 @@ public class WarGameWorld {
 
         winner.clear();
 
-        Thread gun1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
+        Thread gun1 = new Thread(new GunThread("ally", difficulty));
         Thread gun2 = new Thread(new GunThread("enemy", Difficulty.HARD));
 
-        Thread bomb1 = new Thread(new BombThread("ally", Difficulty.SIMPLE));
+        Thread bomb1 = new Thread(new BombThread("ally", difficulty));
         Thread bomb2 = new Thread(new BombThread("enemy", Difficulty.HARD));
 
-        Thread jet1 = new Thread(new JetThread("ally", Difficulty.SIMPLE));
+        Thread jet1 = new Thread(new JetThread("ally", difficulty));
         Thread jet2 = new Thread(new JetThread("enemy", Difficulty.HARD));
 
         gun1.start();
@@ -85,11 +85,11 @@ public class WarGameWorld {
         jet2.join();
 
         if(Collections.frequency(winner, "enemy") > Collections.frequency(winner, "ally")){
-            String str = player + ", lost" + ", 0 \n";
+            String str = player + ", lost" + ", 0 " + "," + difficulty + "\n";
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "enemy";
         }else {
-            String str = player + ", won" + ", 100 \n";
+            String str = player + ", won" + ", 100" + "," + difficulty + "\n";
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "ally";
         }
