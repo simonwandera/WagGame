@@ -17,7 +17,7 @@ public class Army {
         }
 
         for (int i=(soldiers.size()/2); i< (soldiers.size() * 3/4); i++){
-            soldiers.get(i).assignWeapon(new Jet("jet" + i, 20, "Jet"));
+            soldiers.get(i).assignWeapon(new Jet("jet" + i, 10, "Jet"));
         }
 
         for (int i=(soldiers.size() * 3/4); i< soldiers.size(); i++){

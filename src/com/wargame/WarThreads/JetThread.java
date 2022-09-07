@@ -27,7 +27,7 @@ public class JetThread implements Runnable {
 
         WarGameWorld.enemy.getSoldiers().forEach(item -> {
             Soldier soldier = (Soldier) item;
-            if (item.getWeapon() instanceof Bomb) {
+            if (item.getWeapon() instanceof Jet) {
                 enemyWithJet.add(item);
             }
         });
@@ -116,17 +116,17 @@ public class JetThread implements Runnable {
             if (noJetHasMissiles(allyWithJet) || noJetHasMissiles(enemyWithJet) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers()) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())) {
 
                 if(noJetHasMissiles((allyWithJet)) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())){
-                    WarGameWorld.jetWinner = "enemy";
+                    WarGameWorld.winner.add("enemy");
 
-                }else if(noJetHasMissiles((allyWithJet)) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())){
-                    WarGameWorld.jetWinner = "ally";
+                }else if(noJetHasMissiles((enemyWithJet)) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())){
+                    WarGameWorld.winner.add("ally");
                 }
                 Thread.currentThread().stop();
                 break;
             } else {
                 fireMissile();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

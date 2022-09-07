@@ -116,17 +116,17 @@ public class BombThread implements Runnable{
         while (true) {
             if (noBombIsActive(allyWithBomb) || noBombIsActive(enemyWithBomb) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers()) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())) {
                 if(noBombIsActive((allyWithBomb)) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())){
-                    WarGameWorld.bombWinner = "enemy";
+                    WarGameWorld.winner.add("enemy");
 
                 }else if(noBombIsActive((enemyWithBomb)) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())){
-                    WarGameWorld.bombWinner = "ally";
+                    WarGameWorld.winner.add("ally");
                 }
                 Thread.currentThread().stop();
                 break;
             } else {
                 throwBomb();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

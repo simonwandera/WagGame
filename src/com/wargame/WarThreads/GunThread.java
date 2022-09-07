@@ -117,17 +117,17 @@ public class GunThread implements Runnable{
             if (noGunHasBullets(allyWithGuns) || noGunHasBullets(enemyWithGuns) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers()) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())) {
 
                 if(noGunHasBullets((allyWithGuns)) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())){
-                    WarGameWorld.gunWinner = "enemy";
+                    WarGameWorld.winner.add("enemy");
 
                 }else if(noGunHasBullets((enemyWithGuns)) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())){
-                    WarGameWorld.gunWinner = "ally";
+                    WarGameWorld.winner.add("ally");
                 }
                 Thread.currentThread().stop();
                 break;
             } else {
                 startFiring();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
