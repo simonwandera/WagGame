@@ -114,6 +114,13 @@ public class JetThread implements Runnable {
         getSoldiersWithJet();
         while (true) {
             if (noJetHasMissiles(allyWithJet) || noJetHasMissiles(enemyWithJet) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers()) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())) {
+
+                if(noJetHasMissiles((allyWithJet)) || allSoldiersAreDead(WarGameWorld.ally.getSoldiers())){
+                    WarGameWorld.jetWinner = "enemy";
+
+                }else if(noJetHasMissiles((allyWithJet)) || allSoldiersAreDead(WarGameWorld.enemy.getSoldiers())){
+                    WarGameWorld.jetWinner = "ally";
+                }
                 Thread.currentThread().stop();
                 break;
             } else {

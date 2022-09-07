@@ -39,7 +39,7 @@ public class Soldier {
             weapon.fireMissiles();
         }
         else if ( weapon instanceof Bomb)
-            System.out.println(this.militaryId + "Bombing");
+            System.out.println(this.militaryId + " Bombing");
             weapon.explode();
     }
     public void shot() {

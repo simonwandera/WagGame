@@ -58,6 +58,10 @@ public class WarGameWorld {
         // [1 - All soldiers are dead,
         // [2 - No weapon has bullets
 
+        bombWinner = "";
+        jetWinner = "";
+        gunWinner = "";
+
         Thread gun1 = new Thread(new GunThread("ally", Difficulty.SIMPLE));
         Thread gun2 = new Thread(new GunThread("enemy", Difficulty.SIMPLE));
 
@@ -81,9 +85,9 @@ public class WarGameWorld {
         jet1.join();
         jet2.join();
 
-
-        System.out.println("Gun winner" + gunWinner);
-
+        System.out.println("Gun winner " + gunWinner);
+        System.out.println("Bomb winner " + bombWinner);
+        System.out.println("Jet winner " + jetWinner);
 
         }
     }
