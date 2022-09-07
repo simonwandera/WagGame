@@ -150,6 +150,7 @@ public class WarGame {
 
         HashMap<String, Integer> board = new HashMap<>();
 
+//        update ally
         for (int i = 0; i< scoresList.size(); i++){
             int points = 0;
             for (int j =0; j< leaderboard.size(); j++){
@@ -160,8 +161,15 @@ public class WarGame {
             board.put(scoresList.get(i), points);
         }
 
-        System.out.println(scoresList);
-        System.out.println(leaderboard);
+        //Update enemy
+        int enemyScore = 0;
+        for (int i = 0; i< leaderboard.size(); i++){
+            if(leaderboard.get(i).get(1).trim().equals("lost")){
+                enemyScore = enemyScore + 100;
+            }
+        }
+        board.put("enemy", enemyScore);
+
         System.out.println(board);
     }
 }
