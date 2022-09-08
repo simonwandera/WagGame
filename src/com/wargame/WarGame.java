@@ -47,7 +47,6 @@ public class WarGame {
 
         System.out.println("Welcome back " +player + "!");
         System.out.println("You have a total of " + getPoints(player) + " points");
-
         System.out.println("\nWould you like to play?");
 
         System.out.println("\n Y/N");
@@ -100,9 +99,8 @@ public class WarGame {
 
     public static boolean playerExists(String player){
         for (int i = 0; i< readFile(playersPath).size(); i++){
-            if (readFile(playersPath).get(i).get(0).equals(player)){
+            if (readFile(playersPath).get(i).get(0).equals(player))
                 return true;
-            }
         }
         return false;
     }
@@ -140,23 +138,21 @@ public class WarGame {
         ArrayList<ArrayList<String>> leaderboard = new ArrayList<>(readFile(gamesPath));
         HashSet<String> hashSet = new HashSet<>();
 
-        for (int i=0; i< leaderboard.size(); i++){
+        for (int i=0; i< leaderboard.size(); i++)
             hashSet.add(leaderboard.get(i).get(0));
-        }
+
         hashSet.add("enemy");
 
         ArrayList<String> scoresList = new ArrayList<>();
         scoresList.addAll(hashSet);
 
         HashMap<String, Integer> board = new HashMap<>();
-
 //        update ally
         for (int i = 0; i< scoresList.size(); i++){
             int points = 0;
             for (int j =0; j< leaderboard.size(); j++){
-                if (leaderboard.get(j).get(0).equals(scoresList.get(i))){
+                if (leaderboard.get(j).get(0).equals(scoresList.get(i)))
                     points = points + Integer.parseInt(leaderboard.get(j).get(2).trim());
-                }
             }
             board.put(scoresList.get(i), points);
         }
@@ -164,12 +160,11 @@ public class WarGame {
         //Update enemy
         int enemyScore = 0;
         for (int i = 0; i< leaderboard.size(); i++){
-            if(leaderboard.get(i).get(1).trim().equals("lost")){
+            if(leaderboard.get(i).get(1).trim().equals("lost"))
                 enemyScore = enemyScore + 100;
-            }
         }
         board.put("enemy", enemyScore);
 
-        System.out.println(board);
+        board.forEach((k,v) -> System.out.println("Key\t" + k + " value\t" + v));
     }
 }
