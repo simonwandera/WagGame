@@ -5,6 +5,8 @@ import com.wargame.WarThreads.GunThread;
 import com.wargame.WarThreads.JetThread;
 
 import java.text.CollationKey;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -59,6 +61,9 @@ public class WarGameWorld {
         // [1 - All soldiers are dead,
         // [2 - No weapon has bullets
 
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYYMMdd");
+        String today = LocalDate.now().format(myFormatObj);
+
         winner.clear();
 
         Thread gun1 = new Thread(new GunThread("ally", difficulty));
@@ -85,11 +90,11 @@ public class WarGameWorld {
         jet2.join();
 
         if(Collections.frequency(winner, "enemy") > Collections.frequency(winner, "ally")){
-            String str = player + ", lost" + ", 0 " + "," + difficulty + "\n";
+            String str = player + ", lost" + ", 0 " + "," + difficulty + "," + today + "\n";
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "enemy";
         }else {
-            String str = player + ", won" + ", 100" + "," + difficulty + "\n";
+            String str = player + ", won" + ", 100" + "," + difficulty + "," + today + "\n";
             WarGame.writeToFile(WarGame.gamesPath, str);
             return "ally";
         }

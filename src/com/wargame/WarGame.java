@@ -190,9 +190,9 @@ public class WarGame {
     public static void allGames(String path){
         System.out.println("All games as at " + new Date() + "\n------------------------***--------------------");
 
-        System.out.println("Player\t Result\t Score\t\t Level");
+        System.out.println("Player\t Result\t Score\t Level \t Date");
         readFile(path).forEach(item -> {
-            System.out.println(item.get(0) + "\t"+ item.get(1) + "\t"+ item.get(2) + "\t\t"+ item.get(3));
+            System.out.println(item.get(0) + "\t"+ item.get(1) + "\t"+ item.get(2) + "\t"+ item.get(3) + "\t" +item.get(4));
         });
     }
 }
