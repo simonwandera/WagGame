@@ -31,20 +31,20 @@ public class Soldier {
 
     public void shoot(){
         if (weapon instanceof Gun) {
-            System.out.println(this.militaryId + " Shooting");
+            System.out.println(this.militaryId + " Shooting \uD83D\uDD2B");
             weapon.gunShoot();
         }
         else if (weapon instanceof Jet) {
-            System.out.println(this.militaryId + " Firing");
+            System.out.println(this.militaryId + " Firing \uD83D\uDE80");
             weapon.fireMissiles();
         }
         else if ( weapon instanceof Bomb)
-            System.out.println(this.militaryId + " Bombing");
+            System.out.println(this.militaryId + " Bombing \uD83D\uDCA3");
             weapon.explode();
     }
     public void shot() {
         setAlive(false);
-        System.out.println(this.militaryId + " Was just killed");
+        System.out.println(this.militaryId + " Was just killed \uD83D\uDC7E");
     }
 
 }

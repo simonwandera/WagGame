@@ -20,9 +20,10 @@ public class WarGame {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("What is your name");
-        String player = scanner.nextLine();
+        String player = scanner.nextLine().toLowerCase();
 
         if(playerExists(player)){
+            mainMenu();
             play(player);
         }else {
 
@@ -36,6 +37,7 @@ public class WarGame {
 
             Thread.sleep(2000);
             System.out.println("Registered successfully");
+
             play(player);
 
         }
@@ -177,5 +179,9 @@ public class WarGame {
             Map.Entry<String, Integer> e = list.get(i);
             System.out.println(i+1 + "\t"+ e.getKey() + "\t" + e.getValue());
         }
+    }
+
+    public static void mainMenu(){
+        System.out.println("1. StartGame \n 2. Leaderboard \n 3.View games");
     }
 }
