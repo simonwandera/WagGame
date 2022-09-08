@@ -10,6 +10,7 @@ public class WarGame {
 
     public static String gamesPath = "games.db";
     public static String playersPath = "players.db";
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws InterruptedException {
 
         leaderBoard();
@@ -17,13 +18,11 @@ public class WarGame {
         System.out.println("\t*************  WELCOME TO WARGAME 1.0 ***************");
         System.out.println("**************************************");
 
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("What is your name");
         String player = scanner.nextLine().toLowerCase();
 
         if(playerExists(player)){
-            mainMenu();
+            mainMenu(player);
             play(player);
         }else {
 
@@ -38,14 +37,12 @@ public class WarGame {
             Thread.sleep(2000);
             System.out.println("Registered successfully");
 
-            play(player);
+            mainMenu(player);
 
         }
     }
 
     public static void play(String player) throws InterruptedException {
-
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome back " +player + "!");
         System.out.println("You have a total of " + getPoints(player) + " points");
@@ -181,7 +178,23 @@ public class WarGame {
         }
     }
 
-    public static void mainMenu(){
-        System.out.println("1. StartGame \n 2. Leaderboard \n 3.View games");
+    public static void mainMenu(String player) throws InterruptedException {
+        while (true) {
+            System.out.println(" 1.\tStartGame \n 2.\tLeaderboard \n 3.\tView all games \n 4.\tExit...");
+
+            String choice = scanner.nextLine();
+            if (choice.equals("1"))
+                play(player);
+            else if (choice.equals("2"))
+                leaderBoard();
+            else if (choice.equals("3")) {
+                allGames();
+            } else
+                System.out.println("\uD83D\uDCDB Invalid choice, please try again!");
+        }
+    }
+
+    public static void allGames(){
+
     }
 }
