@@ -12,8 +12,6 @@ public class WarGame {
     public static String playersPath = "players.db";
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws InterruptedException {
-
-        leaderBoard();
         System.out.println("**************************************");
         System.out.println("\t*************  WELCOME TO WARGAME 1.0 ***************");
         System.out.println("**************************************");
@@ -44,41 +42,31 @@ public class WarGame {
 
     public static void play(String player) throws InterruptedException {
 
-        System.out.println("Welcome back " +player + "!");
-        System.out.println("You have a total of " + getPoints(player) + " points");
-        System.out.println("\nWould you like to play?");
+        System.out.println("Welcome back " +player.toUpperCase() + "!");
+        System.out.println("You have a total of " + getPoints(player) + " points\n");
 
-        System.out.println("\n Y/N");
-        String choice = scanner.nextLine();
+        System.out.println("Select level \n S - Simple \t H - hard \t  E - extreme");
+        String level = scanner.nextLine();
+        WarGameWorld game = new WarGameWorld(player);
 
-        if(choice.toLowerCase().equals("y")){
-            System.out.println("Select level \n S - Simple \t H - hard \t  E - extreme");
-            String level = scanner.nextLine();
-            WarGameWorld game = new WarGameWorld(player);
-
-            if (level.toLowerCase().equals("s")){
-                Difficulty mode = Difficulty.SIMPLE;
-                if (game.run(mode).equals("ally"))
-                    System.out.println("\nYou won");
-                else
-                    System.out.println("\n You lost");
-            }else if(level.toLowerCase().equals("h")){
-                Difficulty mode = Difficulty.HARD;
-                if (game.run(mode).equals("ally"))
-                    System.out.println("\nYou won");
-                else
-                    System.out.println("\n You lost");
-            } else if (level.toLowerCase().equals("e")) {
-                Difficulty mode = Difficulty.EXTREME;
-                if (game.run(mode).equals("ally"))
-                    System.out.println("\nYou won");
-                else
-                    System.out.println("\n You lost");
-            }
-
-        }else {
-            System.out.println("Exiting...");
-            System.exit(1000);
+        if (level.toLowerCase().equals("s")){
+            Difficulty mode = Difficulty.SIMPLE;
+            if (game.run(mode).equals("ally"))
+                System.out.println("\nYou won");
+            else
+                System.out.println("\n You lost");
+        }else if(level.toLowerCase().equals("h")){
+            Difficulty mode = Difficulty.HARD;
+            if (game.run(mode).equals("ally"))
+                System.out.println("\nYou won");
+            else
+                System.out.println("\n You lost");
+        } else if (level.toLowerCase().equals("e")) {
+            Difficulty mode = Difficulty.EXTREME;
+            if (game.run(mode).equals("ally"))
+                System.out.println("\nYou won");
+            else
+                System.out.println("\n You lost");
         }
     }
 
@@ -134,6 +122,7 @@ public class WarGame {
     }
 
     public static void leaderBoard(){
+        System.out.println("Leaderboard as at " + new Date() + "\n------------------------***--------------------");
         ArrayList<ArrayList<String>> leaderboard = new ArrayList<>(readFile(gamesPath));
         HashSet<String> hashSet = new HashSet<>();
 
@@ -180,21 +169,29 @@ public class WarGame {
 
     public static void mainMenu(String player) throws InterruptedException {
         while (true) {
-            System.out.println(" 1.\tStartGame \n 2.\tLeaderboard \n 3.\tView all games \n 4.\tExit...");
+            System.out.println("\n");
+            System.out.println(" 1.\tStartGame \n 2.\tLeaderboard \n 3.\tView all games \n 4.\tExit");
 
             String choice = scanner.nextLine();
             if (choice.equals("1"))
                 play(player);
             else if (choice.equals("2"))
                 leaderBoard();
-            else if (choice.equals("3")) {
-                allGames();
+            else if (choice.equals("3"))
+                allGames(gamesPath);
+            else if(choice.equals("4")){
+                System.out.println("Exiting...");
+                System.exit(3);
+
             } else
                 System.out.println("\uD83D\uDCDB Invalid choice, please try again!");
         }
     }
 
-    public static void allGames(){
-
+    public static void allGames(String path){
+        System.out.println("Player\t Result\t Score\t Level");
+        readFile(path).forEach(item -> {
+            System.out.println(item.get(0) + "\t"+ item.get(1) + "\t"+ item.get(2) + "\t"+ item.get(3));
+        });
     }
 }
