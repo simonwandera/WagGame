@@ -36,7 +36,6 @@ public class WarGame {
             System.out.println("Registered successfully");
 
             mainMenu(player);
-
         }
     }
 
@@ -189,9 +188,11 @@ public class WarGame {
     }
 
     public static void allGames(String path){
-        System.out.println("Player\t Result\t Score\t Level");
+        System.out.println("All games as at " + new Date() + "\n------------------------***--------------------");
+
+        System.out.println("Player\t Result\t Score\t\t Level");
         readFile(path).forEach(item -> {
-            System.out.println(item.get(0) + "\t"+ item.get(1) + "\t"+ item.get(2) + "\t"+ item.get(3));
+            System.out.println(item.get(0) + "\t"+ item.get(1) + "\t"+ item.get(2) + "\t\t"+ item.get(3));
         });
     }
 }
