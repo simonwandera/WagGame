@@ -61,7 +61,7 @@ public class WarGameWorld {
         // [1 - All soldiers are dead,
         // [2 - No weapon has bullets
 
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYYMMdd");
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-dd");
         String today = LocalDate.now().format(myFormatObj);
 
         winner.clear();
